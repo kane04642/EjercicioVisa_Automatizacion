@@ -9,10 +9,19 @@ import org.example.pageObject.Constantes;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 
-public class EmpleadosGET implements Task {
+public class SongsGET implements Task {
 
-    public static Performable consultarEmpleados(){
-        return  instrumented(EmpleadosGET.class);
+    private final String id;
+    private final String l;
+
+    public SongsGET(String id, String l) {
+        this.id = id;
+        this.l = l;
+    }
+
+
+    public static Performable consultarSong(String id, String l){
+        return  instrumented(SongsGET.class, id,l);
     }
     @Override
     public <T extends Actor> void performAs(T actor) {
@@ -20,6 +29,10 @@ public class EmpleadosGET implements Task {
                 Get.resource(Constantes.RESOURCE).with(
                         requestSpecification -> requestSpecification
                                 .contentType(ContentType.JSON)
+                                .header("x-rapidapi-host",Constantes.X_RAPIDAPI_HOST)
+                                .header("x-rapidapi-key",Constantes.X_RAPIDAPI_KEY)
+                                .queryParam("id", id)
+                                .queryParam("l",l)
                 )
         );
 
