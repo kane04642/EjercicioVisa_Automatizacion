@@ -4,10 +4,10 @@ import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
 
-public class StatusGET implements Question<Integer> {
+public class StatusResponse implements Question<Integer> {
 
-    public  static StatusGET was(){
-        return new StatusGET();
+    public  static StatusResponse was(){
+        return new StatusResponse();
     }
     @Override
     public Integer answeredBy(Actor actor) {
