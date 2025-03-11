@@ -5,22 +5,17 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.actors.OnStage;
-import net.serenitybdd.screenplay.rest.questions.LastResponse;
 import org.apache.http.HttpStatus;
 import org.example.models.pet.BodyPet;
 import org.example.models.pet.Category;
 import org.example.models.pet.Tag;
 import org.example.questions.StatusResponse;
+import org.example.questions.ValidatePetData;
 import org.example.tasks.pet.PostPet;
-import org.example.util.JsonUtils;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class StepsPostPets {
@@ -81,15 +76,10 @@ public class StepsPostPets {
 
     @And("Daniel should see the data of the new pet {string} {string} {string}{string}")
     public void danielShouldSeeTheDataOfTheNewPet(String id, String name, String name_category, String status) throws IOException {
-        //Validate all tag values
-        //Deserialize the JSON response into a Java object
-        String jsonResponse = OnStage.theActorInTheSpotlight().asksFor(LastResponse.received()).body().asString();
-        BodyPet bodyPet = JsonUtils.deserializeJsonToBodyPet(jsonResponse);
 
-        //  asserts
-        assertThat(bodyPet.getId(), equalTo(Integer.parseInt(id)));
-        assertThat(bodyPet.getName(), equalTo(name));
-        assertThat(bodyPet.getStatus(), equalTo(status));
-        assertThat(bodyPet.getCategory().getName(), equalTo(name_category));
+        OnStage.theActorCalled("actorCloud").describedAs(("Daniel validate that data is correct"));
+        OnStage.theActorInTheSpotlight().should(
+                seeThat(ValidatePetData.with(id, name, name_category, status), equalTo(true))
+        );
     }
 }
