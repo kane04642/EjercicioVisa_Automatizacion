@@ -4,7 +4,7 @@
     <artifactId>Pet_Visa</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>Ejericicio_RappiPay</name>
+    <name>Ejercicio_Visa</name>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -101,6 +101,14 @@
             <version>5.5.0</version>
             <scope>compile</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.18.2</version>
+        </dependency>
+
+
 
     </dependencies>
     <build>
@@ -125,7 +133,6 @@
                     <includes>
                         <include>**/*Test.java</include>
                         <include>**/Test*.java</include>
-                        <include>**/*ContratodigitalLogin.java</include>
                         <include>**/When*.java</include>
                     </includes>
                     <parallel>classes</parallel>
